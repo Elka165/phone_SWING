@@ -3,55 +3,47 @@ package phone.method;
 import java.util.ArrayList;
 
 public class ListOfElements {
-    public ArrayList typeOfDamageList = new ArrayList<String>();
-    public ArrayList typeOfRecipientList = new ArrayList<String>();
-    public ArrayList listOfCity = new ArrayList<String>();
-    public ArrayList listOfPermissions= new ArrayList();
+    public ArrayList typeOfTopic = new ArrayList<String>();
+    public ArrayList typeOfSubcategoryList = new ArrayList<String>();
+    public ArrayList listWhoCalls = new ArrayList<String>();
 
-    private ArrayList addTypeOfDamage() {
-        typeOfDamageList.add("");
-        typeOfDamageList.add("EH");
-        typeOfDamageList.add("MTU");
-        return typeOfDamageList;
+    private ArrayList addTypeOfTopic() {
+        typeOfTopic.add("");
+        typeOfTopic.add("Trmat1");
+        typeOfTopic.add("Temat2");
+        return typeOfTopic;
     }
 
-    public ArrayList getTypeOfDamageList() {
-        addTypeOfDamage();
-        return typeOfDamageList;
+    public ArrayList getTypeOfTopic() {
+        addTypeOfTopic();
+        return typeOfTopic;
     }
 
-    private ArrayList addTypeOfRecipientList() {
-        typeOfRecipientList.add("");
-        typeOfRecipientList.add("Sąd");
-        typeOfRecipientList.add("Komornik");
-        typeOfRecipientList.add("UM");
-        return typeOfRecipientList;
+    private ArrayList addTypeOfSubcategoryList() {
+        typeOfSubcategoryList.add("");
+        typeOfSubcategoryList.add("Podkategoria1");
+        typeOfSubcategoryList.add("Podkategoria2");
+        typeOfSubcategoryList.add("Podkategoria3");
+        return typeOfSubcategoryList;
     }
 
-    public ArrayList getTypeOfRecipientList() {
-        addTypeOfRecipientList();
-        return typeOfRecipientList;
+    public ArrayList getTypeOfSubcategoryList() {
+        addTypeOfSubcategoryList();
+        return typeOfSubcategoryList;
     }
 
-    private ArrayList addListOfCity() {
-        listOfCity.add("");
-        return listOfCity;
+    private ArrayList addListWhoCalls() {
+        listWhoCalls.add("");
+        listWhoCalls.add("poszkodowany");
+        listWhoCalls.add("ubezpieczony");
+        listWhoCalls.add("sprawca");
+        listWhoCalls.add("zgłaszający");
+        return listWhoCalls;
     }
 
-    public ArrayList getListOfCity() {
-        addListOfCity();
-        return listOfCity;
+    public ArrayList getListWhoCalls() {
+        addListWhoCalls();
+        return listWhoCalls;
     }
 
-    private ArrayList addListOfPermissions() {
-        listOfPermissions.add("");
-        listOfPermissions.add("podstawowe");
-        listOfPermissions.add("administracyjne");
-        return listOfPermissions;
-    }
-
-    public ArrayList getListOfPermissions() {
-        addListOfPermissions();
-        return listOfPermissions;
-    }
 }

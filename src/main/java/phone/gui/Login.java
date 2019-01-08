@@ -21,7 +21,7 @@ public class Login implements ActionListener {
     JButton loginButton;
     JButton cancelButton;
     JLabel txtRegister;
-    JudicialFeesPanel judicialFeesPanel = new JudicialFeesPanel();
+    PhonePanel phonePanel = new PhonePanel();
 
     public Login() {
 
