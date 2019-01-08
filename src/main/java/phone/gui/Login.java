@@ -21,7 +21,6 @@ public class Login implements ActionListener {
     JButton loginButton;
     JButton cancelButton;
     JLabel txtRegister;
-    PhonePanel phonePanel = new PhonePanel();
 
     public Login() {
 
@@ -48,7 +47,7 @@ public class Login implements ActionListener {
         String path = propertiesLoader.loadImages("sourceLoginImagePath").toString();
         imageLoginIcon = new ImageIcon(path);
         loginLabelImage = new JLabel(imageLoginIcon);
-        loginLabelImage.setBounds(25, 50, 130, 130);
+        loginLabelImage.setBounds(25, 30, 130, 130);
     }
 
     public void addLogin() {
