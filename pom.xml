@@ -17,7 +17,7 @@
 
     <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
     <dependencies>
-        <!--Hibernate-->
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -40,6 +40,12 @@
                     <artifactId>dom4j</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>7.1.2.jre8-preview</version>
         </dependency>
         <dependency>
             <groupId>com.toedter</groupId>
