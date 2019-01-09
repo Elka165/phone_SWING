@@ -1,5 +1,6 @@
 package phone.gui;
 
+import phone.gui.SizerAndColorSwing;
 import phone.method.PropertiesLoader;
 
 import javax.swing.*;
