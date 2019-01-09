@@ -47,13 +47,12 @@ public class SizerAndColorSwing {
         jPanel.setBounds(sizeX, sizeY, width, height);
     }
 
-    public JFrame assignJFrame(JFrame jFrame, Integer width, Integer height) {
+    public void assignJFrame(JFrame jFrame, Integer width, Integer height) {
         jFrame.setSize(width, height);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.getContentPane().setBackground(Color.WHITE);
         jFrame.setLayout(null);
-        return jFrame;
     }
 
     public void assignJTextArea(JTextArea jTextArea, Integer sizeX, Integer sizeY) {

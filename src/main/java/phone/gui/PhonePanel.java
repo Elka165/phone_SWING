@@ -71,7 +71,7 @@ public class PhonePanel implements ActionListener {
     }
 
     public void addFrame(){
-        mainFrame = new JFrame("POWÓD KONTAKTU TELEFONICZNEGO");
+        mainFrame = new JFrame("POŁĄCZENIA PRZYCHODZĄCE");
         sizerAndColorSwing.assignJFrame(mainFrame, WIDTH_JFRAME, HEIGHT_JFRAME);
     }
 
