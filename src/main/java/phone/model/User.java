@@ -16,6 +16,12 @@ public class User {
         this.surnameAndName = surnameAndName;
     }
 
+    public User(String login, String name, String surname) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.surnameAndName=surname + ' ' + name;
+    }
     public Integer getId() {
         return id;
     }

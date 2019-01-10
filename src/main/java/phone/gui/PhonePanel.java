@@ -2,35 +2,39 @@ package phone.gui;
 
 import phone.method.ListOfElements;
 import phone.method.PropertiesLoader;
+import phone.model.CallsRepository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
-import static phone.gui.RegistrationPanel.SIZE_X;
+public class PhonePanel implements ActionListener, ItemListener {
 
-public class PhonePanel implements ActionListener {
-
-    public static Integer DISTANCE_FROM_THE_TEXT_TOP = 30;
-    public static Integer DISTANCE_FROM_THE_TEXT_RIGHT = 60;
-    public static Integer WIDTH_JFRAME = 900;
-    public static Integer HEIGHT_JFRAME = 400;
+    private static Integer DISTANCE_FROM_THE_TEXT_TOP = 30;
+    private static Integer DISTANCE_FROM_THE_TEXT_RIGHT = 60;
+    private static Integer WIDTH_JFRAME = 900;
+    private static Integer HEIGHT_JFRAME = 400;
     public JFrame mainFrame;
-    JComboBox comboTopicList = new JComboBox();
-    JLabel txtTopicList;
-    JComboBox comboSubcategory = new JComboBox();
-    JLabel txtSubcategory;
-    JLabel textNumberClaims;
-    ImageIcon imageIcon;
-    JLabel image;
-    JTextField fieldNumberClaims = new JTextField();
-    SizerAndColorSwing sizerAndColorSwing = new SizerAndColorSwing();
-    ListOfElements listOfElements = new ListOfElements();
-    PropertiesLoader propertiesLoader = new PropertiesLoader();
-    JButton buttonSave;
-    JLabel txtWhoCalls;
-    JComboBox comboWhoCalls;
-    JLabel txtInfo;
+    private JComboBox comboTopicList = new JComboBox();
+    private JLabel txtTopicList;
+    private JComboBox comboSubcategory = new JComboBox();
+    private JLabel txtSubcategory;
+    private JLabel textNumberClaims;
+    private ImageIcon imageIcon;
+    private JLabel image;
+    private JTextField fieldNumberClaims = new JTextField();
+    private SizerAndColorSwing sizerAndColorSwing = new SizerAndColorSwing();
+    private ListOfElements listOfElements = new ListOfElements();
+    private PropertiesLoader propertiesLoader = new PropertiesLoader();
+    private JButton buttonSave;
+    private JLabel txtWhoCalls;
+    private JComboBox comboWhoCalls;
+    private JLabel txtInfo;
+    private CallsRepository callsRepository=new CallsRepository();
 
     public PhonePanel() {
         addFrame();
@@ -84,14 +88,16 @@ public class PhonePanel implements ActionListener {
     public void addCategory(){
         txtTopicList = new JLabel("Temat rozmowy");
         comboTopicList=new JComboBox();
-        sizerAndColorSwing.assignSizeJComboBox(comboTopicList, 20, 100 + DISTANCE_FROM_THE_TEXT_TOP, 210,listOfElements.getTypeOfTopic());
+        sizerAndColorSwing.assignSizeJComboBox(comboTopicList, 20, 100 + DISTANCE_FROM_THE_TEXT_TOP, 210,callsRepository.getTypeOfTopic());
         sizerAndColorSwing.assignSizeColorJLabel(txtTopicList, 40, 100);
+        comboTopicList.setActionCommand("comboTopicList");
+        comboTopicList.addItemListener(this);
     }
 
     public void addSubcategory(){
         txtSubcategory = new JLabel("Podkategoria");
         comboSubcategory=new JComboBox();
-        sizerAndColorSwing.assignSizeJComboBox(comboSubcategory, 220+ DISTANCE_FROM_THE_TEXT_RIGHT, 100 + DISTANCE_FROM_THE_TEXT_TOP, 210,listOfElements.getTypeOfSubcategoryList());
+        sizerAndColorSwing.assignSizeJComboBox(comboSubcategory, 220+ DISTANCE_FROM_THE_TEXT_RIGHT, 100 + DISTANCE_FROM_THE_TEXT_TOP, 210,callsRepository.getTypeOfSubcategoryList(comboTopicList.getSelectedItem().toString()));
         sizerAndColorSwing.assignSizeColorJLabel(txtSubcategory, 240+DISTANCE_FROM_THE_TEXT_RIGHT, 100);
     }
 
@@ -107,8 +113,21 @@ public class PhonePanel implements ActionListener {
         txtInfo.setForeground(new Color(207, 0, 15));
         txtInfo.setFont(new Font("Helvetica", Font.BOLD, 12));
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+            comboSubcategory.removeAllItems();
+            callsRepository.getTypeOfSubcategoryList(comboTopicList.getSelectedItem().toString());
+            ArrayList newList=new ArrayList();
+            newList=callsRepository.getTypeOfSubcategoryList(comboTopicList.getSelectedItem().toString());
+            comboSubcategory.setModel(new DefaultComboBoxModel(newList.toArray()));
+            comboSubcategory.repaint();
+        }
     }
 }

@@ -2,30 +2,34 @@ package phone.gui;
 
 import phone.method.ListOfElements;
 import phone.method.PropertiesLoader;
+import phone.model.User;
+import phone.sql.SqlQuery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class RegistrationPanel {
-    public static Integer WIDTH_JFRAME = 560;
-    public static Integer HEIGHT_JFRAME = 430;
-    public static Integer SIZE_X = 250;
-    public static Integer WIDTH_FIELD = 240;
+public class RegistrationPanel implements ActionListener {
+    private static Integer WIDTH_JFRAME = 560;
+    private static Integer HEIGHT_JFRAME = 430;
+    private static Integer SIZE_X = 250;
+    private static Integer WIDTH_FIELD = 240;
     public JFrame registrationFrame;
-    PropertiesLoader propertiesLoader = new PropertiesLoader();
-    ImageIcon imageRegistrationIcon;
-    JLabel registrationLabelImage;
-    SizerAndColorSwing sizerAndColorSwing = new SizerAndColorSwing();
-    JLabel txtLogin;
-    JLabel userLogin;
-    JLabel txtInfo;
-    JLabel txtName;
-    JTextField nameField;
-    JLabel txtSurname;
-    JTextField surnameField;
-    ListOfElements listOfElements = new ListOfElements();
-    JButton saveButton;
-    JLabel txtBackToLoginPanel;
+    private PropertiesLoader propertiesLoader = new PropertiesLoader();
+    private ImageIcon imageRegistrationIcon;
+    private JLabel registrationLabelImage;
+    private SizerAndColorSwing sizerAndColorSwing = new SizerAndColorSwing();
+    private JLabel txtLogin;
+    private JLabel userLogin;
+    private JLabel txtInfo;
+    private JLabel txtName;
+    private JTextField nameField;
+    private JLabel txtSurname;
+    private JTextField surnameField;
+    private ListOfElements listOfElements = new ListOfElements();
+    private JButton saveButton;
+    private JLabel txtBackToLoginPanel;
 
 
     public RegistrationPanel() {
@@ -43,11 +47,11 @@ public class RegistrationPanel {
         registrationFrame.setVisible(true);
     }
 
-    public void addComponentToRegistrationPanel(Component component){
+    private void addComponentToRegistrationPanel(Component component){
         registrationFrame.add(component);
     }
 
-    public void addAllToRegistrationPanel(){
+    private void addAllToRegistrationPanel(){
         addComponentToRegistrationPanel(registrationLabelImage);
         addComponentToRegistrationPanel(txtLogin);
         addComponentToRegistrationPanel(userLogin);
@@ -60,7 +64,7 @@ public class RegistrationPanel {
         addComponentToRegistrationPanel(txtBackToLoginPanel);
     }
 
-    public void addLogin() {
+    private void addLogin() {
         txtLogin = new JLabel("Login");
         sizerAndColorSwing.assignSizeColorJLabel(txtLogin, SIZE_X, 50);
         userLogin = new JLabel(System.getProperty("user.name"));
@@ -69,27 +73,27 @@ public class RegistrationPanel {
         userLogin.setFont(new Font("Helvetica", Font.BOLD, 12));
     }
 
-    public void addMainPanel() {
+    private void addMainPanel() {
         registrationFrame = new JFrame("REJESTRACJA");
         sizerAndColorSwing.assignJFrame(registrationFrame, WIDTH_JFRAME, HEIGHT_JFRAME);
         registrationFrame.setVisible(false);
     }
 
-    public void addFieldInfo() {
+    private void addFieldInfo() {
         txtInfo = new JLabel("*Wszystkie pola muszą zostać uzupełnione");
         sizerAndColorSwing.assignSizeColorJLabel(txtInfo, SIZE_X, 25);
         txtInfo.setForeground(new Color(207, 0, 15));
         txtInfo.setFont(new Font("Helvetica", Font.BOLD, 12));
     }
 
-    public void addImageRegistration() {
+    private void addImageRegistration() {
         String path = propertiesLoader.loadImages("sourceRegistrationImagePath").toString();
         imageRegistrationIcon = new ImageIcon(path);
         registrationLabelImage = new JLabel(imageRegistrationIcon);
         registrationLabelImage.setBounds(10, 70, SIZE_X, 200);
     }
 
-    public void addName() {
+    private void addName() {
         txtName = new JLabel("Imię");
         sizerAndColorSwing.assignSizeColorJLabel(txtName, SIZE_X, 100);
 
@@ -97,21 +101,33 @@ public class RegistrationPanel {
         sizerAndColorSwing.assignSizeJTextField(nameField, SIZE_X, 130, WIDTH_FIELD);
     }
 
-    public void addSurname() {
+    private void addSurname() {
         txtSurname = new JLabel("Nazwisko");
         sizerAndColorSwing.assignSizeColorJLabel(txtSurname, SIZE_X, 160);
         surnameField = new JTextField(15);
         sizerAndColorSwing.assignSizeJTextField(surnameField, SIZE_X, 190, WIDTH_FIELD);
     }
 
-    public void addSaveButton() {
+    private void addSaveButton() {
         saveButton = new JButton("Zapisz");
         sizerAndColorSwing.assignSizeJButton(saveButton, 390, 350, 100);
+        saveButton.addActionListener(this);
     }
 
-    public void addBackToLoginPanel(){
+    private void addBackToLoginPanel(){
         txtBackToLoginPanel = new JLabel("← Powrót do logowania");
         sizerAndColorSwing.assignSizeColorJLabel(txtBackToLoginPanel, 40, 350);
         sizerAndColorSwing.changeFontWhenMoveMouseAndActivateNemFrame(txtBackToLoginPanel, registrationFrame, "phone.gui.Login");
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source == saveButton) {
+            SqlQuery sqlQuery=new SqlQuery();
+            User newUser=new User(userLogin.getText(), nameField.getText(), surnameField.getText());
+            sqlQuery.addUser(newUser, registrationFrame);
+        }
     }
 }

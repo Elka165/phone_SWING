@@ -29,5 +29,4 @@ private static final Integer NUMBERS_OF_NUMBERS_IN_ACCOUNT=26;
         }
         return isCorrect;
     }
-
 }
