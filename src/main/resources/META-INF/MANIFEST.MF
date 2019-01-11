@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: mssql-jdbc-7.1.2.jre8-preview.jar sqljdbc4.jar jcalendar-1
+ .4.jar
+Main-Class: phone.Main
+
