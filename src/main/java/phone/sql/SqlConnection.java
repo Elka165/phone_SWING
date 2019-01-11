@@ -14,7 +14,7 @@ public class SqlConnection {
     private final String SQL_URL=appProperties.getImagePath("sqlUrl");
 
     public Statement connectUpdate() throws Throwable {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").getClassLoader();
             String url = SQL_URL;
             connection = DriverManager.getConnection(url);
             return connection.createStatement();
